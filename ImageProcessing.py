@@ -11,13 +11,10 @@ import tensorflow as tf
 import tensorflow_hub as hub
 from six.moves.urllib.request import urlopen
 
-IMAGE_1_URL = 'https://upload.wikimedia.org/wikipedia/commons/2/28/Bridge_of_Sighs%2C_Oxford.jpg'
-IMAGE_2_URL = 'https://upload.wikimedia.org/wikipedia/commons/c/c3/The_Bridge_' \
-              'of_Sighs_and_Sheldonian_Theatre%2C_Oxford.jpg'
 
 
-IMAGE_1_JPG = 'image_1.jpg'
-IMAGE_2_JPG = 'image_2.jpg'
+IMAGE_1_JPG = 'cat.jpg'
+IMAGE_2_JPG = 'panda.jpg'
 
 
 def download_and_resize_image(url, filename, new_width=256, new_height=256):
@@ -30,8 +27,8 @@ def download_and_resize_image(url, filename, new_width=256, new_height=256):
   pil_image_rgb.save(filename, format='JPEG', quality=90)
 
 
-download_and_resize_image(IMAGE_1_URL, IMAGE_1_JPG)
-download_and_resize_image(IMAGE_2_URL, IMAGE_2_JPG)
+download_and_resize_image(IMAGE_1_URL, cat.JPG)
+download_and_resize_image(IMAGE_2_URL, panda.JPG)
 
 
 def show_images(image_path_list):
@@ -81,7 +78,7 @@ image_tf = image_input_fn()
 
 with tf.train.MonitoredSession() as sess:
   results_dict = {}
-  for image_path in [IMAGE_1_JPG, IMAGE_2_JPG]:
+  for image_path in [C:\Users\User\Desktop\Image\cat.JPG, C:\Users\User\Desktop\Image\panda.JPG]:
     image = sess.run(image_tf)
     print('Extracting locations and descriptors from %s' % image_path)
     results_dict[image_path] = sess.run(
@@ -89,7 +86,7 @@ with tf.train.MonitoredSession() as sess:
         feed_dict={image_placeholder: image})
 
 
-def match_images(results_dict, image_1_path, image_2_path):
+def match_images(results_dict, C:\Users\User\Desktop\Image\cat, C:\Users\User\Desktop\Image\panda):
   distance_threshold = 0.8
 
   locations_1, descriptors_1 = results_dict[image_1_path]
@@ -126,8 +123,8 @@ def match_images(results_dict, image_1_path, image_2_path):
 
   # Visualize correspondences.
   _, ax = plt.subplots()
-  img_1 = mpimg.imread(image_1_path)
-  img_2 = mpimg.imread(image_2_path)
+  img_1 = mpimg.imread(cat.jpg)
+  img_2 = mpimg.imread(panda.jpg)
   inlier_idxs = np.nonzero(inliers)[0]
   plot_matches(
       ax,
@@ -140,4 +137,4 @@ def match_images(results_dict, image_1_path, image_2_path):
   ax.axis('off')
   ax.set_title('DELF correspondences')
 
-match_images(results_dict, IMAGE_1_JPG, IMAGE_2_JPG)
+match_images(results_dict, PandaJPG, PandaJPG)
